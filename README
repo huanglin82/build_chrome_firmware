@@ -1,0 +1,27 @@
+
+运行下面的命令安装所需要的库：
+sudo apt-get install gcc-4.9-arm-linux-gnueabi-base
+sudo apt-get install acpica-tools
+sudo apt-get install libyaml-dev
+sudo apt-get install liblzma-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libcrypto++-dev
+
+编译打包firmware：
+1.进入build_firmware目录，运行"./bcf --board {要编译的板子名称}",
+  生成的firmware文件为build_firmware目录下的 {BOARD}.image.bin.
+2.--fbranch: 编译firmware分支。
+  如果要编译firmware分支，运行 "./bcf --board {要编译的板子名称} --fbranch"
+  因为编译firmware分支的时候，depthcharge要求的目标文件跟master分支不一样，所以加该参数用来区别。
+3.--ecupdate：使能EC_SOFTWARE_SYNC功能。
+  脚本默认是把该功能disalbe，就是说使用的是RO的ec，想升级RW的ec
+  需要将要升级的ec.RW.bin和ec.RW.hash两个文件拷贝到build_firmware目录下，
+  编译的时候加上--ecupdate参数即可。
+4. --fastboot: 生成支持fastboot功能的firmware
+5.如果有修改coreboot或者depthcharge的CONFIG文件，在重新编译前要在 build_firmware目录下运行“rm -rf tmp/”
+  命令，保证修改的CONFIG能够使能
+6.在bcf脚本中
+  export PATH=$PATH:~/work/tool/gcc/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/
+  这句指定gcc的目录，要根据自己的电脑环境配置。
+  编译firmwarer要求aarch64-linux-gnu版本在6.0以上。我用的是gcc-linaro-6.3.1版本。
+   
