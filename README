@@ -18,10 +18,3 @@ sudo apt-get install libcrypto++-dev
   需要将要升级的ec.RW.bin和ec.RW.hash两个文件拷贝到build_firmware目录下，
   编译的时候加上--ecupdate参数即可。
 4. --fastboot: 生成支持fastboot功能的firmware
-5.如果有修改coreboot或者depthcharge的CONFIG文件，在重新编译前要在 build_firmware目录下运行“rm -rf tmp/”
-  命令，保证修改的CONFIG能够使能
-6.在bcf脚本中
-  export PATH=$PATH:~/work/tool/gcc/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/
-  这句指定gcc的目录，要根据自己的电脑环境配置。
-  编译firmwarer要求aarch64-linux-gnu版本在6.0以上。我用的是gcc-linaro-6.3.1版本。
-   
